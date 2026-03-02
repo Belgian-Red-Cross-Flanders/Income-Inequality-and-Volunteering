@@ -8,8 +8,6 @@ library(ggrepel)
 
 ##########################
 #IMPORTING
-
-setwd("C:\\Users\\KKAY\\OneDrive - Rode Kruis-Vlaanderen\\General\\Paper 3 - Other outcomes\\GINI")
 gini <- read.xlsx("Red Cross Gini volunteering research.xlsx", sheetName = "GINI_Analysis", header = TRUE)
 
 
@@ -222,3 +220,4 @@ lowcountries <- ggplot(gini_lower, aes(x = Gini_coefficient, y = Volunteer_hours
   )
 
 ggsave("gini_low countries.png", plot = lowcountries, width = 8, height = 6, dpi = 300)
+
