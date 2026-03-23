@@ -12,16 +12,18 @@
 # Summary
 This article examines the relationship between income inequality and volunteering across 111 countries using the Johns Hopkins Third Sector Dataset and World Bank data. While prior research in European contexts suggests that higher inequality is associated with lower volunteering, our global analysis reveals a structurally conditional pattern. In upper-middle- and high-income countries, greater income inequality is linked to lower levels of volunteering. In contrast, in low- and lower-middle-income countries, the association reverses direction, suggesting distinct contextual dynamics. The findings challenge universal assumptions about the inequality–volunteering relationship and highlight the importance of embedding volunteering research within broader structural and economic conditions. Implications are discussed for both scholarship and policy within the framework of Sustainable Development Goal 10.
 
-# Import Data 
+# [Import Data](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/tree/main/data_raw)
+
+Using the data_raw folder, three excel files can be downloaded: 
 
 Volunteer Hours and Gini Coefficient 
-Download [Red Cross Gini volunteering research.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/Red%20Cross%20Gini%20volunteering%20research.xlsx)
+Download [Red Cross Gini volunteering research.xlsx]
 
 Palma Ratio 
-Download [palma-ratio.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/palma-ratio.xlsx)
+Download [palma-ratio.xlsx]
 
 Income Share of Richest 1% of Population
-Download [Richest_1.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/Richest_1.xlsx)
+Download [Richest_1.xlsx]
 
 # [Scripts](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/tree/main/scripts)
 
@@ -33,13 +35,13 @@ The folder of scripts uses the following structure:
   
   [03_import_data.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/03_import_data.R)
   
-  [04_clean_merge](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/04_clean_merge.R)
+  [04_clean_merge](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/04_clean_merge.R) Note: this creates the data_clean folder, in which the master_dataset.xlsx is created 
   
-  [05_descriptives](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/05_descriptives.R)
+  [05_descriptives](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/05_descriptives.R) Note: this creates the descriptives folder in the outputs folder 
   
-  [06_correlations](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/06_correlations.R)
+  [06_correlations](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/06_correlations.R) Note: this creates the correlations folder in the outputs folder 
   
-  [07_figures.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/07_figures.R)
+  [07_figures.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/07_figures.R) Note: this creates the figures folder in the outputs folder 
 
 
 
