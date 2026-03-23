@@ -14,9 +14,35 @@ This article examines the relationship between income inequality and volunteerin
 
 # Import Data 
 
+Volunteer Hours and Gini Coefficient 
 Download [Red Cross Gini volunteering research.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/Red%20Cross%20Gini%20volunteering%20research.xlsx)
 
-The following R script will allow replication of the analysis for the paper as well as the descriptive statistics, inferential statistics, and the figures: [Gini.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/GINI.R)
+Palma Ratio 
+Download [palma-ratio.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/palma-ratio.xlsx)
+
+Income Share of Richest 1% of Population
+Download [Richest_1.xlsx](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/Richest_1.xlsx)
+
+# [Scripts](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/tree/main/scripts)
+
+The folder of scripts uses the following structure: 
+  
+  [01_load packages.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/01_load_packages.R)
+  
+  [02_functions.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/02_functions.R)
+  
+  [03_import_data.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/03_import_data.R)
+  
+  [04_clean_merge](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/04_clean_merge.R)
+  
+  [05_descriptives](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/05_descriptives.R)
+  
+  [06_correlations](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/06_correlations.R)
+  
+  [07_figures.R](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/blob/main/scripts/07_figures.R)
+
+
+
 
 
 
