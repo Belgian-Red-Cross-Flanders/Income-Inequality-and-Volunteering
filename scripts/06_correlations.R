@@ -8,8 +8,7 @@ source(here::here("scripts", "02_functions.R"))
 master <- readRDS(here::here("data_clean", "master_dataset.rds"))
 
 # Create output folders
-dir.create(here::here("outputs", "correlations"),      recursive = TRUE, showWarnings = FALSE)
-
+dir.create(here::here("outputs", "correlations"), recursive = TRUE, showWarnings = FALSE)
 
 #########################
 #Analysis 
@@ -32,7 +31,7 @@ datasets <- list(
 )
 
 # Inequality variables to correlate with Volunteer_hours
-vars <- c("Gini_coefficient", "S90S10", "Palma", "Richest_1")
+vars <- c("Gini_coefficient", "Palma", "Richest_1")
 
 # Correlation methods
 methods <- c("pearson", "spearman")
@@ -64,7 +63,8 @@ for (group in names(datasets)) {
         variable = v,
         method = m,
         n = length(x),
-        estimate = as.numeric(test$estimate),   # <-- FIXED
+        estimate = as.numeric(test$estimate),
+        statistic = as.numeric(test$statistic),
         p_value = test$p.value,
         conf_low = ifelse(is.null(test$conf.int), NA, test$conf.int[1]),
         conf_high = ifelse(is.null(test$conf.int), NA, test$conf.int[2])
@@ -72,6 +72,7 @@ for (group in names(datasets)) {
     }
   }
 }
+
 correlations_df <- dplyr::bind_rows(correlations)
 
 write.xlsx(correlations_df, here::here("outputs", "correlations", "Correlations.xlsx"))

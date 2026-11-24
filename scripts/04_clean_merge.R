@@ -6,38 +6,69 @@ source(here::here("scripts", "02_functions.R"))
 
 # Clean datasets
 
-#gini
+# tpt
+tpt_vars <- c(
+  "population",
+  "participation",
+  "Volunteering")
 
+tpt_clean <- tpt %>%
+  select(Country, all_of(tpt_vars)) %>%
+  mutate(
+    across(all_of(tpt_vars), ~ na_if(.x, "")),
+    across(all_of(tpt_vars), as.numeric)
+  )
+
+tpt_clean$Country <- sapply(
+  tpt_clean$Country,
+  standardize_country_name
+)
+
+# unemployment
+
+unemployment <- unemployment_raw
+
+colnames(unemployment) <- unemployment[6, ]
+colnames(unemployment)[8] <- "Notes"
+
+unemployment <- unemployment[-(1:6), ] %>%
+  rename(Country = `Reference area`) %>%
+  mutate(
+    `15+` = as.numeric(`15+`),
+    Time = as.numeric(Time)
+  ) %>%
+  filter(
+    Sex == "Total",
+    Time %in% 2012:2021
+  ) %>%
+  select(-Source, -Sex, -`15-24`, -`25+`, -Notes) %>%
+  pivot_wider(
+    names_from = Time,
+    values_from = `15+`
+  ) %>%
+  mutate(
+    unemployment = rowMeans(
+      pick(`2012`:`2021`),
+      na.rm = TRUE
+    )
+  ) %>%
+  select(Country, unemployment)
+
+unemployment$Country <- sapply(
+  unemployment$Country,
+  standardize_country_name
+)
+
+#gini
 gini_clean <- gini_raw[1:111, ]
 gini_clean <- gini_clean %>%
   rename(
     Gini_coefficient = SI.POV.GINI,
-    Volunteer_hours = Number.of.volunteer.hours.per.inhabitant,
     Income_level_4 = income
   ) %>%
-  select(Country, Gini_coefficient, Volunteer_hours, Income_level_4)
+  select(Country, Gini_coefficient, Income_level_4)
 
 gini_clean$Country <- sapply(gini_clean$Country, standardize_country_name)
-
-
-gini_clean <- gini_clean %>%
-  mutate(
-    Income_level_2 = recode(Income_level_4,
-                     "Low income" = "Lower income",
-                     "Lower middle income" = "Lower income",
-                     "Upper middle income" = "Higher income",
-                     "High income" = "Higher income")
-  )
-
-#s90s10
-
-s90s10_clean <- inequality_raw %>%
-  filter(year == 2015) %>%   
-  filter(indicators == "S90S10") %>%
-  rename(Country = country)%>%
-  rename(S90S10 = value) %>%
-  select(Country, S90S10)
-s90s10_clean$Country <- sapply(s90s10_clean$Country, standardize_country_name)
 
 #palma
 
@@ -57,45 +88,69 @@ richest_clean$Country <- sapply(richest_clean$Country, standardize_country_name)
 
 # Merge Datasets
 
-# inequality and gini
+gini_clean <- gini_clean %>%
+  left_join(
+    unemployment,
+    by = "Country"
+  ) %>%
+  left_join(
+    tpt_clean %>%
+      select(
+        Country,
+        population,
+        participation,
+        Volunteering
+      ),
+    by = "Country"
+  )
+
+HOURS_PER_FTE <- 40 * 48
+
+gini_clean <- gini_clean %>%
+  mutate(
+    TE_EAP_ratio = (100 - unemployment) / 100,
+    Volunteer_hours =
+      (Volunteering / 100) *
+      (participation / 100) *
+      TE_EAP_ratio *
+      HOURS_PER_FTE
+  )
+
+gini_clean <- gini_clean %>%
+  mutate(
+    Income_level_2 = recode(Income_level_4,
+                            "Low income" = "Lower income",
+                            "Lower middle income" = "Lower income",
+                            "Upper middle income" = "Higher income",
+                            "High income" = "Higher income")
+  )
+
+# gini and palma
 inequality_master <- gini_clean %>%
-  full_join(s90s10_clean, by = "Country")
-
-#check 
-anti_join(
-  s90s10_clean %>% distinct(Country),
-  inequality_master %>% distinct(Country),
-  by = "Country"
-)
-
-# inequality and palma
-inequality_master <- inequality_master %>%
   full_join(palma_clean, by = "Country")
-
-#check 
-anti_join(
-  palma_clean %>% distinct(Country),
-  inequality_master %>% distinct(Country),
-  by = "Country"
-)
 
 # inequality and richest 1%
 inequality_master <- inequality_master %>%
   full_join(richest_clean, by = "Country")
 
-#check
-anti_join(
-  richest_clean %>% distinct(Country),
-  inequality_master %>% distinct(Country),
-  by = "Country"
-)
-
 #filter dataset for analysis 
 inequality_master <- inequality_master %>% 
   filter(!is.na(Volunteer_hours))
 inequality_master <- inequality_master %>%
-  select(Country, Income_level_2, Income_level_4, Volunteer_hours, Gini_coefficient, 
-         S90S10, Palma, Richest_1)
+  select(
+    Country,
+    Income_level_2,
+    Income_level_4,
+    Volunteer_hours,
+    unemployment,
+    TE_EAP_ratio,
+    Gini_coefficient,
+    Palma,
+    Richest_1,
+    population,
+    participation,
+    Volunteering
+  )
 
 
 # -----------------------
@@ -106,19 +161,6 @@ saveRDS(inequality_master, here::here("data_clean", "master_dataset.rds"))
 writexl::write_xlsx(inequality_master, here::here("data_clean", "master_dataset.xlsx"))
 
 cat("\nMaster dataset created successfully.")
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

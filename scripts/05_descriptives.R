@@ -10,7 +10,7 @@ dir.create(here::here("outputs", "figures"),      recursive = TRUE, showWarnings
 
 #All countries
 
-summary <- master %>%
+descriptives_all <- master %>%
   summarise(across(
     where(is.numeric),
     list(
@@ -23,16 +23,16 @@ summary <- master %>%
     .names = "{.col}_{.fn}"
   ))
 
-summary <- summary %>%
+descriptives_all <- descriptives_all %>%
   pivot_longer(
     cols = everything(),
     names_to = "measure",
     values_to = "value"
   )
 
-write.xlsx(summary, here::here("outputs", "descriptives", "Descriptives_All Incomes.xlsx"))
+write.xlsx(descriptives_all, here::here("outputs", "descriptives", "Descriptives_All Incomes.xlsx"))
 
-summary_2 <- master %>%
+descriptives_2 <- master %>%
   group_by(Income_level_2) %>%
   summarise(across(
     where(is.numeric),
@@ -46,38 +46,14 @@ summary_2 <- master %>%
     .names = "{.col}_{.fn}"
   ))
 
-summary_2 <- summary_2 %>%
+descriptives_2 <- descriptives_2 %>%
   pivot_longer(
     cols = -Income_level_2,
     names_to = "measure",
     values_to = "value"
   )
 
-write.xlsx(summary_2, here::here("outputs", "descriptives", "Descriptives_2 Income Groups.xlsx"))
-
-summary_4 <- master %>%
-  group_by(Income_level_4) %>%
-  summarise(across(
-    where(is.numeric),
-    list(
-      mean   = ~mean(., na.rm = TRUE),
-      median = ~median(., na.rm = TRUE),
-      sd = ~sd(., na.rm = TRUE),
-      min    = ~min(., na.rm = TRUE),
-      max    = ~max(., na.rm = TRUE)
-    ),
-    .names = "{.col}_{.fn}"
-  ))
-
-summary_4 <- summary_4 %>%
-  pivot_longer(
-    cols = -Income_level_4,
-    names_to = "measure",
-    values_to = "value"
-  )
-
-write.xlsx(summary_4, here::here("outputs", "descriptives", "Descriptives_4 Income Groups.xlsx"))
-
+write.xlsx(descriptives_2, here::here("outputs", "descriptives", "Descriptives_2 Income Groups.xlsx"))
 
 # Session Information
 
@@ -86,3 +62,4 @@ print(sessionInfo())
 sink()
 
 message("Descriptives complete. See outputs/descriptives and outputs/figures.")
+

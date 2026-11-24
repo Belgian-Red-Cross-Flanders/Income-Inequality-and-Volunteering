@@ -3,7 +3,7 @@
 
 1: Department of Economic Studies, College of Polytechnics Jihlava, Jihlava, Czech Republic; corresponding author: jakub.dostal@vspj.cz
 
-2: Centre for Empirical Research on the Third Sector, Belgian Red Cross-Flanders, Mechelen, Belgium
+2: Centre for Research on the Third Sector, Belgian Red Cross-Flanders, Mechelen, Belgium
 
 3: Department of Public Health and Primary Care, Leuven Institute for Healthcare Policy, KU Leuven, Leuven, Belgium
 
@@ -14,9 +14,15 @@ This article examines the relationship between income inequality and volunteerin
 
 # [Import Data](https://github.com/Belgian-Red-Cross-Flanders/Income-Inequality-and-Volunteering/tree/main/data_raw)
 
-Using the data_raw folder, three excel files can be downloaded: 
+Using the data_raw folder, five excel files can be downloaded: 
 
-Volunteer Hours and Gini Coefficient 
+TPT-Volunteering
+Download [All variables_thirdpillar.xlsx]
+
+Unemployment
+Download [SDG_0852_SEX_AGE_RT_A_EN.xlsx]
+
+Gini Coefficient 
 Download [Red Cross Gini volunteering research.xlsx]
 
 Palma Ratio 

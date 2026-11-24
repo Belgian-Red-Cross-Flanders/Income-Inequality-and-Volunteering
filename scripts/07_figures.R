@@ -7,7 +7,7 @@ source(here::here("scripts", "02_functions.R"))
 master <- readRDS(here::here("data_clean", "master_dataset.rds"))
 
 # Create output folders
-dir.create(here::here("outputs", "figures"),      recursive = TRUE, showWarnings = FALSE)
+dir.create(here::here("outputs", "figures"), recursive = TRUE, showWarnings = FALSE)
 
 #Figures
 
@@ -59,50 +59,6 @@ ggsave(
   here::here("outputs", "figures", "GINI_3Panels.png"),
   plot = gini_panel,
   width = 12,
-  height = 4,
-  dpi = 300
-)
-
-
-
-# Plot for S90/S10 
-
-s90s10_panel <- ggplot(
-  df_high,
-  aes(x = S90S10, y = Volunteer_hours)
-) +
-  geom_point(alpha = 0.6, color = "black") +
-  geom_smooth(
-    method = "lm",
-    se = TRUE,
-    color = "black",
-    fill = "lightblue"
-  ) +
-  scale_x_continuous(
-    limits = c(5, 30),
-    expand = c(0, 0)
-  ) +
-  scale_y_continuous(
-    limits = c(0, 120),
-    expand = c(0, 0)
-  ) +
-  labs(
-    x = "S90/S10",
-    y = "Number of volunteer hours per inhabitant"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    panel.grid = element_blank(),
-    axis.line = element_line(color = "black"),
-    axis.ticks = element_line(color = "black"),
-    strip.text = element_text(size = 12, face = "bold")
-  )
-
-
-ggsave(
-  here::here("outputs", "figures", "S90S10_1Panel.png"),
-  plot = s90s10_panel,
-  width = 4,
   height = 4,
   dpi = 300
 )
@@ -214,7 +170,7 @@ label_df <- plot_long %>%
   ) %>%
   arrange(measure)
 
-## All i ncomes 
+## All incomes 
 
 all_panel <- ggplot(
   plot_long,
@@ -348,3 +304,4 @@ ggsave(
   height = 4,
   dpi = 300
 )
+
