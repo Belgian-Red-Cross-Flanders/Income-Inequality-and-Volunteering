@@ -108,11 +108,15 @@ HOURS_PER_FTE <- 40 * 48
 
 gini_clean <- gini_clean %>%
   mutate(
-    TE_EAP_ratio = (100 - unemployment) / 100,
+    labour_force_rate = participation / 100,
+    employment_rate = labour_force_rate * ((100 - unemployment) / 100),
+    
+    volunteer_share = Volunteering/100,
+    
+    # Annual volunteer hours per inhabitant 
     Volunteer_hours =
-      (Volunteering / 100) *
-      (participation / 100) *
-      TE_EAP_ratio *
+      volunteer_share *
+      employment_rate *
       HOURS_PER_FTE
   )
 
@@ -143,7 +147,6 @@ inequality_master <- inequality_master %>%
     Income_level_4,
     Volunteer_hours,
     unemployment,
-    TE_EAP_ratio,
     Gini_coefficient,
     Palma,
     Richest_1,

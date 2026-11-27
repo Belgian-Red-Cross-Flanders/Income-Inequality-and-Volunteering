@@ -1,0 +1,37 @@
+{
+  "chart": {
+    "title": "Palma ratio",
+    "subtitle": "The Palma ratio is a measure of inequality that divides the share received by the richest 10% by the share of the poorest 40%. Higher values indicate higher inequality. Inequality is measured here in terms of income before taxes and benefits.",
+    "note": "Income is measured before payment of taxes and non-pension benefits, but after the payment of public and private pensions.",
+    "citation": "World Inequality Database (WID.world) (2025)",
+    "originalChartUrl": "https://ourworldindata.org/explorers/inequality?Data=World+Inequality+Database+%28Incomes+before+tax%29&Indicator=Palma+ratio&country=CHL~BRA~ZAF~USA~FRA~CHN",
+    "selection": [
+      "Chile",
+      "Brazil",
+      "South Africa",
+      "United States",
+      "France",
+      "China"
+    ]
+  },
+  "columns": {
+    "country": {
+      "titleShort": "Country",
+      "titleLong": "Country",
+      "type": "EntityName",
+      "citationShort": " – processed by Our World in Data",
+      "citationLong": " – processed by Our World in Data. “Country” [dataset]. World Inequality Database (WID.world) (2025) [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/undefined.metadata.json"
+    },
+    "palma_ratio_pretax": {
+      "titleShort": "Palma ratio (before tax) (World Inequality Database)",
+      "titleLong": "Palma ratio (before tax) (World Inequality Database)",
+      "type": "Numeric",
+      "citationShort": " – processed by Our World in Data",
+      "citationLong": " – processed by Our World in Data. “Palma ratio (before tax) (World Inequality Database)” [dataset]. World Inequality Database (WID.world) (2025) [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/undefined.metadata.json"
+    }
+  },
+  "dateDownloaded": "2026-03-16",
+  "activeFilters": {}
+}
